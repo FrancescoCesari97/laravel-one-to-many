@@ -6,7 +6,8 @@
     <div class="container">
 
         <button class=" btn btn-primary my-4">
-            <a class="text-light" href="{{ 'admin.projects.create' }}"><i class="fa-solid fa-plus"></i> crea nuovo project</a>
+            <a class="text-light" href="{{ route('admin.projects.create') }}"><i class="fa-solid fa-plus"></i> crea nuovo
+                project</a>
 
 
         </button>
@@ -37,9 +38,11 @@
                                     modifica</a>
                             </button>
 
-                            <button class=" btn btn-danger my-4">
-                                <a class="text-light" href="{{ route('admin.projects.destroy', $project) }}">
-                                    elimina</a>
+                            <button class=" btn btn-danger my-4" data-bs-toggle="modal"
+                                data-bs-target="#modal{{ $project->id }}">
+                                <a class="text-light">
+                                    elimina
+                                </a>
                             </button>
                         </div>
                     </div>
@@ -53,6 +56,36 @@
 
         </div>
     </div>
+@endsection
+
+@section('modal')
+
+    @foreach ($projects as $project)
+        <div class="modal" tabindex="-1" id="modal{{ $project->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Attenzione</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>sei sicuro di voler cancellare questo progetto {{ $project->title }}? non si può più tornare
+                            indietro</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                        <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button class="btn btn-danger" type="submit">
+                                Delete project
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 
 @section('css')
