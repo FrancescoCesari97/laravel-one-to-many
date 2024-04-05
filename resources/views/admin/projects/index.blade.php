@@ -22,8 +22,9 @@
                 <div class="col-4">
                     <div class="card h-100">
 
-                        <h2>{{ $project['title'] }}</h2>
-                        <p>{{ $project['slug'] }}</p>
+                        <h2>{{ $project->title }}</h2>
+                        <p>{{ $project->type->label }}</p>
+                        <p>{{ $project->slug }}</p>
                         <p>{{ $project->getAbstract(200) }}</p>
 
                         <div class="d-flex justify-content-around">

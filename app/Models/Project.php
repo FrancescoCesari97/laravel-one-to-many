@@ -14,7 +14,7 @@ class Project extends Model
     // funzione per recuperare un tipo
     public function type()
     {
-        return $this->belogsTo(type::class);
+        return $this->belongsTo(type::class);
     }
 
     // come prendere i primi 15 caratteri del content
