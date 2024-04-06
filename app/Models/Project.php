@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
+    protected $fillable = ['type_id', 'title', 'content'];
 
     // funzione per recuperare un tipo
     public function type()

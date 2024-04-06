@@ -18,7 +18,7 @@
 
             @csrf
 
-            <div class="col-12">
+            <div class="col-6">
                 <label class="form-label" for="title">Titolo</label>
                 <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title"
                     value="{{ old('title') }}" {{-- required --}}>
@@ -26,7 +26,21 @@
                 {{-- @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror --}}
+
             </div>
+
+            <div class="col-6 ">
+                <label class="form-label" for="type_id">Categoria</label>
+                <select class="form-select" name="type_id" id="type_id">
+                    <option value="">seleziona una categoria</option>
+
+                    @foreach ($types as $type)
+                        <option value="{{ $type->id }}">{{ $type->label }}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
 
 
 
