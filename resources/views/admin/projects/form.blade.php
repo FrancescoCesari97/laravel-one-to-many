@@ -1,24 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'crea projects')
+@section('title', (empty($project->id) ? 'Creazione' : 'Modifica') . 'project')
 
 @section('content')
     <div class="container">
 
         <h2 class=" my-4">
-            creazione nuovo progetto
+            {{ empty($project->id) ? 'Creazione' : 'Modifica' }} progetto
         </h2>
 
-        <form action="{{ route('admin.projects.store') }}" class="py-5 row g-5" method="POST">
+        <form action="{{ empty($project->id) ? route('admin.projects.store') : route('admin.projects.update', $project) }}"
+            class="py-5 row g-5" method="POST">
+
+            @if (!empty($project->id))
+                @method('PATCH')
+            @endif
+
             @csrf
+
             <div class="col-12">
                 <label class="form-label" for="title">Titolo</label>
                 <input class="form-control @error('title') is-invalid @enderror" type="text" id="title" name="title"
                     value="{{ old('title') }}" {{-- required --}}>
 
-                @error('title')
+                {{-- @error('title')
                     <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                @enderror --}}
             </div>
 
 
@@ -31,7 +38,7 @@
 
             <div class="col-3">
 
-                <button class="btn btn-success">crea nuovo</button>
+                <button class="btn btn-success">{{ empty($project->id) ? 'Creazione' : 'Modifica' }} progetto</button>
             </div>
 
         </form>
